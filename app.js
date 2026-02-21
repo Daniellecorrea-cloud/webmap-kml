@@ -102,7 +102,7 @@ async function loadKmz({ url, name, color }) {
 (async () => {
   try {
     await loadKml({ url: "data/ide_1104_mg_lim_reg_metrop_pol.kml", name: "lim_reg_metrop_pol", color: "#007E7A" });
-    await loadKmz({ url: "data/ide_1601_mg_zonas_climaticas_pol.kml", name: "zonas_climaticas", color: "#ECB11F" });
+    await loadKml({ url: "data/ide_1601_mg_zonas_climaticas_pol.kml", name: "zonas_climaticas", color: "#ECB11F" });
   } catch (e) {
     console.error(e);
     alert("Erro ao carregar camadas. Veja o console (F12).");
