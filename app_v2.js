@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // ===============================
   // 1) Mapa base
   // ===============================
-  const leafletMap = L.map("map", { preferCanvas: true }).setView([-19.92, -43.94], 10);
-  window.leafletMap = leafletMap; // ajuda debug
+  const leafletMap = L.map("map", { preferCanvas: true }).setView([-19.92, -43.94], 6);
+  window.leafletMap = leafletMap; // debug
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; OpenStreetMap'
@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     wrap.querySelector("input").addEventListener("change", (e) => {
       const lyr = overlayLayers[name];
       if (!lyr) return;
+
       if (e.target.checked) lyr.addTo(leafletMap);
       else leafletMap.removeLayer(lyr);
     });
@@ -93,20 +94,22 @@ document.addEventListener("DOMContentLoaded", function () {
           fillOpacity: 0.9
         }),
 
-      // ✅ Clique e tooltip com o nome
       onEachFeature: (feature, lyr) => {
         const props = feature.properties || {};
+        let label = "Sem nome";
 
-        const nome =
-          props.name ||
-          props.Name ||
-          props.NOME ||
-          props.nome ||
-          props.description ||
-          "Sem nome";
+        // ✅ Campo para Região Metropolitana
+        if (props.ide_1104_mg_lim_reg_metrop_pol_1lb_catmetr) {
+          label = props.ide_1104_mg_lim_reg_metrop_pol_1lb_catmetr;
+        }
 
-        lyr.bindPopup(`<strong>${nome}</strong>`);
-        lyr.bindTooltip(nome, { sticky: true });
+        // ✅ Campo para Zonas Climáticas (tipo/umidade)
+        if (props.ide_1601_mg_zonas_climaticas_pol_1tp_umidade) {
+          label = props.ide_1601_mg_zonas_climaticas_pol_1tp_umidade;
+        }
+
+        lyr.bindPopup(`<strong>${label}</strong>`);
+        lyr.bindTooltip(label, { sticky: true });
       }
     });
 
@@ -114,13 +117,14 @@ document.addEventListener("DOMContentLoaded", function () {
     addLegendItem(name, color);
     addLayerToggle(name);
 
+    // Ajuste de zoom
     try {
       leafletMap.fitBounds(layer.getBounds(), { padding: [20, 20] });
     } catch {}
   }
 
   // ===============================
-  // 5) Inicialização
+  // 5) Inicialização (suas camadas)
   // ===============================
   (async () => {
     try {
@@ -143,3 +147,4 @@ document.addEventListener("DOMContentLoaded", function () {
   })();
 
 });
+
