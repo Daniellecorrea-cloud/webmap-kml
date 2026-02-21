@@ -3,17 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>WebMap KML/KMZ + Metadados</title>
+  <title>WebMap KML + Metadados</title>
 
+  <!-- Seus estilos -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Leaflet -->
+  <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 </head>
 
 <body>
@@ -23,23 +22,25 @@
     <aside id="sidebar">
       <h1>Metadados</h1>
 
+      <!-- Camada 1 -->
       <section class="card">
         <h2>ide_1104_mg_lim_reg_metrop_pol</h2>
-        <p><b>Fonte:</b> (IDE SISEMA)</p>
-        <p><b>Data:</b> (21/01/2025)</p>
-        <p><b>Descrição:</b> (Coletado no IDE SISEMA)</p>
+        <p><b>Fonte:</b> IDE SISEMA</p>
+        <p><b>Data:</b> 21/01/2025</p>
+        <p><b>Descrição:</b> Coletado no IDE SISEMA</p>
         <div class="downloads">
-          <a class="btn" href="data/ide_1601_mg_zonas_climaticas_pol.kml" download>Baixar KML</a>
+          <a class="btn" href="data/ide_1104_mg_lim_reg_metrop_pol.kml" download>Baixar KML</a>
         </div>
       </section>
 
+      <!-- Camada 2 -->
       <section class="card">
         <h2>ide_1601_mg_zonas_climaticas_pol</h2>
-        <p><b>Fonte:</b> (IDE SISEMA)</p>
-        <p><b>Data:</b> (21/01/2025)</p>
-        <p><b>Descrição:</b> (Coletado IDE SISEMA)</p>
+        <p><b>Fonte:</b> IDE SISEMA</p>
+        <p><b>Data:</b> 21/01/2025</p>
+        <p><b>Descrição:</b> Coletado no IDE SISEMA</p>
         <div class="downloads">
-          <a class="btn" href="data/ide_1601_mg_zonas_climaticas_pol.kml" download>Baixar KMZ</a>
+          <a class="btn" href="data/ide_1601_mg_zonas_climaticas_pol.kml" download>Baixar KML</a>
         </div>
       </section>
 
@@ -54,6 +55,19 @@
       <div id="layers"></div>
     </aside>
   </div>
+
+  <!-- SCRIPTS NO FINAL (ordem importa) -->
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- toGeoJSON (KML -> GeoJSON) -->
+  <script src="https://unpkg.com/togeojson@0.16.0/dist/togeojson.js"></script>
+
+  <!-- Seu app -->
+  <script src="app.js"></script>
+</body>
+</html>
 
   <script src="app.js"></script>
 </body>
