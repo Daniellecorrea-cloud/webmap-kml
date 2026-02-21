@@ -5,14 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>WebMap KML + Metadados</title>
 
-  <!-- Seus estilos -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 
 <body>
@@ -22,7 +17,6 @@
     <aside id="sidebar">
       <h1>Metadados</h1>
 
-      <!-- Camada 1 -->
       <section class="card">
         <h2>ide_1104_mg_lim_reg_metrop_pol</h2>
         <p><b>Fonte:</b> IDE SISEMA</p>
@@ -33,7 +27,6 @@
         </div>
       </section>
 
-      <!-- Camada 2 -->
       <section class="card">
         <h2>ide_1601_mg_zonas_climaticas_pol</h2>
         <p><b>Fonte:</b> IDE SISEMA</p>
@@ -56,13 +49,11 @@
     </aside>
   </div>
 
-  <!-- SCRIPTS NO FINAL (ordem importa) -->
+  <!-- Scripts no final (ordem importa) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
 
-  <!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<!-- toGeoJSON (KML -> GeoJSON) - caminho correto -->
-<script src="https://cdn.jsdelivr.net/npm/@mapbox/togeojson@0.16.0/dist/togeojson.js"></script>
-
-<!-- Seu app -->
-<script src="app_v2.js?v=2"></script>
+  <!-- Seu app (cache-buster) -->
+  <script src="app_v2.js?v=3"></script>
+</body>
+</html>
