@@ -1,18 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ===============================
   // 1) Mapa base
-  // ===============================
   const leafletMap = L.map("map", { preferCanvas: true }).setView([-19.92, -43.94], 6);
-  window.leafletMap = leafletMap; // debug
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; OpenStreetMap'
   }).addTo(leafletMap);
 
-  // ===============================
-  // 2) Estado + UI
-  // ===============================
+  // 2) UI
   const overlayLayers = {};
   const legendEl = document.getElementById("legend");
   const layersEl = document.getElementById("layers");
@@ -42,24 +37,19 @@ document.addEventListener("DOMContentLoaded", function () {
     wrap.querySelector("input").addEventListener("change", (e) => {
       const lyr = overlayLayers[name];
       if (!lyr) return;
-
       if (e.target.checked) lyr.addTo(leafletMap);
       else leafletMap.removeLayer(lyr);
     });
   }
 
-  // ===============================
-  // 3) Converter KML -> GeoJSON
-  // ===============================
+  // 3) KML -> GeoJSON
   function kmlTextToGeoJson(kmlText) {
     const parser = new DOMParser();
     const xml = parser.parseFromString(kmlText, "text/xml");
     return toGeoJSON.kml(xml);
   }
 
-  // ===============================
   // 4) Carregar KML
-  // ===============================
   async function loadKml({ url, name, color }) {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Falha ao carregar ${url} (HTTP ${res.status})`);
@@ -68,11 +58,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const geojson = kmlTextToGeoJson(text);
 
     console.log("KML:", name, "features:", geojson?.features?.length);
-
-    if (!geojson?.features?.length) {
-      console.warn("Sem feições para desenhar:", name);
-      return;
-    }
 
     const layer = L.geoJSON(geojson, {
       filter: (f) => f && f.geometry,
@@ -96,17 +81,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
       onEachFeature: (feature, lyr) => {
         const props = feature.properties || {};
-        let label = "Sem nome";
 
-        // ✅ Campo para Região Metropolitana
-        if (props.ide_1104_mg_lim_reg_metrop_pol_1lb_catmetr) {
-          label = props.ide_1104_mg_lim_reg_metrop_pol_1lb_catmetr;
-        }
+        // ✅ CAMPOS COM ":" -> usar colchetes
+        const rm = props["ide_1104_mg_lim_reg_metrop_pol_1:lb_catmetr"];
+        const umid = props["ide_1601_mg_zonas_climaticas_pol_1:tp_umidade"];
 
-        // ✅ Campo para Zonas Climáticas (tipo/umidade)
-        if (props.ide_1601_mg_zonas_climaticas_pol_1tp_umidade) {
-          label = props.ide_1601_mg_zonas_climaticas_pol_1tp_umidade;
-        }
+        // fallback se vier sem ":"
+        const rm_alt = props["ide_1104_mg_lim_reg_metrop_pol_1lb_catmetr"];
+        const umid_alt = props["ide_1601_mg_zonas_climaticas_pol_1tp_umidade"];
+
+        // fallback genérico
+        const generic =
+          props.name || props.Name || props.NOME || props.nome || props.description;
+
+        const label = rm || umid || rm_alt || umid_alt || generic || "Sem nome";
 
         lyr.bindPopup(`<strong>${label}</strong>`);
         lyr.bindTooltip(label, { sticky: true });
@@ -117,15 +105,12 @@ document.addEventListener("DOMContentLoaded", function () {
     addLegendItem(name, color);
     addLayerToggle(name);
 
-    // Ajuste de zoom
     try {
       leafletMap.fitBounds(layer.getBounds(), { padding: [20, 20] });
     } catch {}
   }
 
-  // ===============================
-  // 5) Inicialização (suas camadas)
-  // ===============================
+  // 5) Inicialização
   (async () => {
     try {
       await loadKml({
