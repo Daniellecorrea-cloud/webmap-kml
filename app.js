@@ -101,8 +101,8 @@ async function loadKmz({ url, name, color }) {
 // 7) Registre suas camadas aqui
 (async () => {
   try {
-    await loadKml({ url: "data/camada1.kml", name: "Camada 1", color: "#007E7A" });
-    await loadKmz({ url: "data/camada2.kmz", name: "Camada 2", color: "#ECB11F" });
+    await loadKml({ url: "data/ide_1104_mg_lim_reg_metrop_pol.kml", name: "ide_1104_mg_lim_reg_metrop_pol", color: "#007E7A" });
+    await loadKmz({ url: "data/ide_1601_mg_zonas_climaticas_pol.km", name: "data/ide_1601_mg_zonas_climaticas_pol", color: "#ECB11F" });
   } catch (e) {
     console.error(e);
     alert("Erro ao carregar camadas. Veja o console (F12).");
