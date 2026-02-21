@@ -21,7 +21,13 @@ h2 { margin: 10px 0 8px; font-size: 15px; }
   padding: 10px 12px;
   margin-bottom: 10px;
 }
-
+.swatch {
+  width: 18px;
+  height: 12px;
+  display: inline-block;   /* <- adiciona isso */
+  border-radius: 3px;
+  border: 1px solid #999;
+}
 .downloads { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
 .btn {
   display: inline-block;
