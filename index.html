@@ -1,1 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WebMap KML/KMZ + Metadados</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- KMZ support -->
+  <script src="https://unpkg.com/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://unpkg.com/togeojson@0.16.0/dist/togeojson.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="map"></div>
+
+    <aside id="sidebar">
+      <h1>Metadados</h1>
+
+      <section class="card">
+        <h2>Camada 1</h2>
+        <p><b>Fonte:</b> (preencha)</p>
+        <p><b>Data:</b> (preencha)</p>
+        <p><b>Descrição:</b> (preencha)</p>
+        <div class="downloads">
+          <a class="btn" href="data/camada1.kml" download>Baixar KML</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Camada 2</h2>
+        <p><b>Fonte:</b> (preencha)</p>
+        <p><b>Data:</b> (preencha)</p>
+        <p><b>Descrição:</b> (preencha)</p>
+        <div class="downloads">
+          <a class="btn" href="data/camada2.kmz" download>Baixar KMZ</a>
+        </div>
+      </section>
+
+      <hr />
+
+      <h2>Legenda</h2>
+      <ul id="legend" class="legend"></ul>
+
+      <hr />
+
+      <h2>Camadas</h2>
+      <div id="layers"></div>
+    </aside>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
 
