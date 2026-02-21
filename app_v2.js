@@ -75,15 +75,17 @@ document.addEventListener("DOMContentLoaded", function () {
   (async () => {
     try {
       await loadKml({
-        url: "data/ide_1104_mg_lim_reg_metrop_pol.kml",
-        name: "Limite Região Metropolitana",
-        color: "#007E7A"
+         url: "data/ide_1601_mg_zonas_climaticas_pol.kml",
+        name: "Zonas Climáticas",
+        color: "#ECB11F"
+        
       });
 
       await loadKml({
-        url: "data/ide_1601_mg_zonas_climaticas_pol.kml",
-        name: "Zonas Climáticas",
-        color: "#ECB11F"
+      url: "data/ide_1104_mg_lim_reg_metrop_pol.kml",
+        name: "Limite Região Metropolitana",
+        color: "#007E7A"
+        
       });
 
     } catch (e) {
@@ -200,15 +202,16 @@ async function loadKml({ url, name, color }) {
 (async () => {
   try {
     await loadKml({
-      url: "data/ide_1104_mg_lim_reg_metrop_pol.kml",
-      name: "Limite Região Metropolitana",
-      color: "#007E7A"
-    });
-
-    await loadKml({
       url: "data/ide_1601_mg_zonas_climaticas_pol.kml",
       name: "Zonas Climáticas",
       color: "#ECB11F"
+      
+    });
+
+    await loadKml({
+     url: "data/ide_1104_mg_lim_reg_metrop_pol.kml",
+      name: "Limite Região Metropolitana",
+      color: "#007E7A" 
     });
   } catch (e) {
     console.error(e);
