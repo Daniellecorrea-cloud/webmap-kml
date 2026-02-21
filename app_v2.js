@@ -3,11 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // ===============================
   // 1) Mapa base
   // ===============================
-  const map = L.map("map", { preferCanvas: true }).setView([-19.92, -43.94], 10);
+  const leafletMap = L.map("map", { preferCanvas: true }).setView([-19.92, -43.94], 10);
+  window.leafletMap = leafletMap; // ajuda debug
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; OpenStreetMap'
-  }).addTo(map);
+  }).addTo(leafletMap);
 
   // ===============================
   // 2) Estado + UI
@@ -41,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
     wrap.querySelector("input").addEventListener("change", (e) => {
       const lyr = overlayLayers[name];
       if (!lyr) return;
-      if (e.target.checked) lyr.addTo(map);
-      else map.removeLayer(lyr);
+      if (e.target.checked) lyr.addTo(leafletMap);
+      else leafletMap.removeLayer(lyr);
     });
   }
 
@@ -92,11 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
           fillOpacity: 0.9
         }),
 
-      // ✅ Aqui é onde entra o “clicar e ver o nome”
+      // ✅ Clique e tooltip com o nome
       onEachFeature: (feature, lyr) => {
         const props = feature.properties || {};
 
-        // tenta achar o nome em campos comuns
         const nome =
           props.name ||
           props.Name ||
@@ -105,20 +105,17 @@ document.addEventListener("DOMContentLoaded", function () {
           props.description ||
           "Sem nome";
 
-        // Clique: popup
         lyr.bindPopup(`<strong>${nome}</strong>`);
-
-        // Hover: tooltip (opcional)
         lyr.bindTooltip(nome, { sticky: true });
       }
     });
 
-    overlayLayers[name] = layer.addTo(map);
+    overlayLayers[name] = layer.addTo(leafletMap);
     addLegendItem(name, color);
     addLayerToggle(name);
 
     try {
-      map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+      leafletMap.fitBounds(layer.getBounds(), { padding: [20, 20] });
     } catch {}
   }
 
