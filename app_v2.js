@@ -1,8 +1,3 @@
-if (typeof toGeoJSON === "undefined") {
-  alert("Biblioteca toGeoJSON não carregou. Verifique o index.html (ordem dos scripts).");
-  throw new Error("toGeoJSON não carregou");
-}
-
 // ===============================
 // 1) Mapa base
 // ===============================
