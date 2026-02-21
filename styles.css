@@ -1,1 +1,41 @@
+html, body { height: 100%; margin: 0; font-family: system-ui, Arial, sans-serif; }
+#container { display: flex; height: 100%; width: 100%; }
+#map { flex: 2; min-width: 0; }
+
+#sidebar {
+  flex: 1;
+  min-width: 320px;
+  max-width: 480px;
+  padding: 14px 14px 24px;
+  overflow: auto;
+  border-left: 1px solid #ddd;
+  background: #fff;
+}
+
+h1 { margin: 0 0 12px; font-size: 18px; }
+h2 { margin: 10px 0 8px; font-size: 15px; }
+
+.card {
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.downloads { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+.btn {
+  display: inline-block;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  color: #111;
+  background: #f7f7f7;
+}
+
+.legend { list-style: none; padding-left: 0; margin: 0; }
+.legend li { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.swatch { width: 18px; height: 12px; border-radius: 3px; border: 1px solid #999; }
+
+#layers label { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
 
